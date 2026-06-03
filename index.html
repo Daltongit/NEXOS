@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXO | Apoyo Emocional</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <button id="theme-toggle" class="glass-btn"><i class="fa-solid fa-moon"></i></button>
+
+    <section id="view-auth" class="view active glass-panel">
+        <div class="auth-container">
+            <h1 class="logo"><i class="fa-solid fa-leaf"></i> NEXO</h1>
+            <p>Tu espacio seguro</p>
+            
+            <form id="auth-form">
+                <h2 id="auth-title">Iniciar Sesión</h2>
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="auth-username" placeholder="Usuario" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="auth-password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="primary-btn" id="auth-submit">Entrar</button>
+            </form>
+            <p class="toggle-auth">¿No tienes cuenta? <span id="switch-auth">Regístrate aquí</span></p>
+            <p id="auth-message"></p>
+        </div>
+    </section>
+
+    <nav id="main-nav" class="hidden glass-nav">
+        <h2 class="nav-logo"><i class="fa-solid fa-leaf"></i> NEXO</h2>
+        <ul>
+            <li onclick="app.navigate('dashboard')"><i class="fa-solid fa-house"></i> Inicio</li>
+            <li onclick="app.navigate('semaforo')"><i class="fa-solid fa-traffic-light"></i> Semáforo</li>
+            <li onclick="app.navigate('diario')"><i class="fa-solid fa-book-open"></i> Diario</li>
+            <li onclick="app.navigate('diagnostico')"><i class="fa-solid fa-stethoscope"></i> Diagnóstico</li>
+            <li onclick="app.navigate('resultados')"><i class="fa-solid fa-chart-pie"></i> Resultados</li>
+            <li onclick="app.navigate('relajacion')"><i class="fa-solid fa-wind"></i> Relajación</li>
+        </ul>
+        <button onclick="app.logout()" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+    </nav>
+
+    <main id="app-container" class="hidden">
+        
+        <section id="view-dashboard" class="view">
+            <div class="glass-panel main-content fade-in">
+                <h1 id="welcome-msg">Hola</h1>
+                <p>¿Cómo te gustaría empezar hoy?</p>
+                <div class="quick-links">
+                    <div class="card" onclick="app.navigate('semaforo')"><i class="fa-solid fa-traffic-light"></i> Registra tu ánimo</div>
+                    <div class="card" onclick="app.navigate('diagnostico')"><i class="fa-solid fa-clipboard-question"></i> Test rápido</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-semaforo" class="view">
+            <div class="glass-panel main-content fade-in">
+                <h2>Semáforo Emocional</h2>
+                <p>Selecciona cómo te sientes en este momento:</p>
+                <div class="traffic-light">
+                    <button class="light red" onclick="app.saveMood('Rojo', 'Crisis / Abrumado')"></button>
+                    <button class="light orange" onclick="app.saveMood('Naranja', 'Ansioso / Tenso')"></button>
+                    <button class="light yellow" onclick="app.saveMood('Amarillo', 'Neutral / Apático')"></button>
+                    <button class="light green" onclick="app.saveMood('Verde', 'Bien / Tranquilo')"></button>
+                </div>
+                <p id="mood-feedback" class="feedback-msg"></p>
+            </div>
+        </section>
+
+        <section id="view-diario" class="view">
+            <div class="glass-panel main-content fade-in">
+                <h2>Diario Personal</h2>
+                <textarea id="diary-text" placeholder="Escribe aquí lo que sientes hoy..."></textarea>
+                <button onclick="app.saveNote()" class="primary-btn"><i class="fa-solid fa-floppy-disk"></i> Guardar Nota</button>
+                <div id="notes-list" class="list-container"></div>
+            </div>
+        </section>
+
+        <section id="view-diagnostico" class="view">
+            <div class="glass-panel main-content fade-in">
+                <h2>Evaluación Rápida</h2>
+                <div id="quiz-container">
+                    <h3 id="quiz-question">Cargando...</h3>
+                    <div id="quiz-options" class="options-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-resultados" class="view">
+            <div class="glass-panel main-content fade-in">
+                <h2>Tu Historial de Bienestar</h2>
+                <div id="results-list" class="list-container"></div>
+            </div>
+        </section>
+
+        <section id="view-relajacion" class="view">
+            <div class="glass-panel main-content text-center fade-in">
+                <h2>Respiración Guiada</h2>
+                <p>Sigue el círculo para estabilizar tu ritmo cardíaco.</p>
+                <div class="breathing-circle">
+                    <span id="breathe-text">Inhala</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
