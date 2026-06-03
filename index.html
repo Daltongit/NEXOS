@@ -3,113 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXO | Apoyo Emocional</title>
+    <title>NEXO | Tu Espacio Seguro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <button id="theme-toggle" class="glass-btn"><i class="fa-solid fa-moon"></i></button>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
 
-    <section id="view-auth" class="view active glass-panel">
-        <div class="auth-container">
-            <h1 class="logo"><i class="fa-solid fa-leaf"></i> NEXO</h1>
-            <p>Tu espacio seguro</p>
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <p>Conectando con NEXO...</p>
+    </div>
+
+    <button id="theme-toggle" class="glass-btn float-anim" aria-label="Cambiar tema">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <section id="view-auth" class="view active">
+        <div class="glass-panel auth-box fade-in-up">
+            <div class="brand-header">
+                <i class="fa-solid fa-leaf brand-icon"></i>
+                <h1 class="logo">NEXO</h1>
+                <p class="subtitle">Tranquilidad a un clic de distancia</p>
+            </div>
             
-            <form id="auth-form">
-                <h2 id="auth-title">Iniciar Sesión</h2>
-                <div class="input-group">
+            <form id="auth-form" class="stagger-1">
+                <h2 id="auth-title">Bienvenido de nuevo</h2>
+                <div class="input-wrapper">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" id="auth-username" placeholder="Usuario" required>
+                    <input type="text" id="auth-username" placeholder="Tu usuario" required autocomplete="off">
                 </div>
-                <div class="input-group">
+                <div class="input-wrapper">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="auth-password" placeholder="Contraseña" required>
+                    <input type="password" id="auth-password" placeholder="Tu contraseña" required>
                 </div>
-                <button type="submit" class="primary-btn" id="auth-submit">Entrar</button>
+                <button type="submit" class="primary-btn pulse-hover" id="auth-submit">Ingresar al sistema</button>
             </form>
-            <p class="toggle-auth">¿No tienes cuenta? <span id="switch-auth">Regístrate aquí</span></p>
-            <p id="auth-message"></p>
+            
+            <div class="auth-footer stagger-2">
+                <p>¿Es tu primera vez aquí? <span id="switch-auth" class="highlight-link">Crea tu cuenta</span></p>
+                <p id="auth-message"></p>
+            </div>
         </div>
     </section>
 
-    <nav id="main-nav" class="hidden glass-nav">
-        <h2 class="nav-logo"><i class="fa-solid fa-leaf"></i> NEXO</h2>
-        <ul>
-            <li onclick="app.navigate('dashboard')"><i class="fa-solid fa-house"></i> Inicio</li>
-            <li onclick="app.navigate('semaforo')"><i class="fa-solid fa-traffic-light"></i> Semáforo</li>
-            <li onclick="app.navigate('diario')"><i class="fa-solid fa-book-open"></i> Diario</li>
-            <li onclick="app.navigate('diagnostico')"><i class="fa-solid fa-stethoscope"></i> Diagnóstico</li>
-            <li onclick="app.navigate('resultados')"><i class="fa-solid fa-chart-pie"></i> Resultados</li>
-            <li onclick="app.navigate('relajacion')"><i class="fa-solid fa-wind"></i> Relajación</li>
+    <nav id="main-nav" class="hidden glass-nav slide-in-left">
+        <div class="nav-brand">
+            <i class="fa-solid fa-leaf"></i> <span>NEXO</span>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item active" onclick="app.navigate('dashboard', this)"><i class="fa-solid fa-house"></i> <span>Inicio</span></li>
+            <li class="nav-item" onclick="app.navigate('semaforo', this)"><i class="fa-solid fa-traffic-light"></i> <span>Semáforo</span></li>
+            <li class="nav-item" onclick="app.navigate('diario', this)"><i class="fa-solid fa-book-open"></i> <span>Diario</span></li>
+            <li class="nav-item" onclick="app.navigate('diagnostico', this)"><i class="fa-solid fa-stethoscope"></i> <span>Diagnóstico</span></li>
+            <li class="nav-item" onclick="app.navigate('resultados', this)"><i class="fa-solid fa-chart-pie"></i> <span>Historial</span></li>
         </ul>
-        <button onclick="app.logout()" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+        <button onclick="app.logout()" class="logout-btn"><i class="fa-solid fa-power-off"></i> <span>Cerrar Sesión</span></button>
     </nav>
 
     <main id="app-container" class="hidden">
         
         <section id="view-dashboard" class="view">
-            <div class="glass-panel main-content fade-in">
-                <h1 id="welcome-msg">Hola</h1>
-                <p>¿Cómo te gustaría empezar hoy?</p>
-                <div class="quick-links">
-                    <div class="card" onclick="app.navigate('semaforo')"><i class="fa-solid fa-traffic-light"></i> Registra tu ánimo</div>
-                    <div class="card" onclick="app.navigate('diagnostico')"><i class="fa-solid fa-clipboard-question"></i> Test rápido</div>
+            <div class="glass-panel content-wrapper fade-in-up">
+                <header class="dashboard-header">
+                    <h1 id="welcome-msg">Hola</h1>
+                    <p>Este es tu espacio seguro. ¿Qué necesitas hoy?</p>
+                </header>
+                
+                <div class="cards-grid">
+                    <div class="action-card stagger-1" onclick="app.navigate('semaforo', document.querySelectorAll('.nav-item')[1])">
+                        <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h3>Registrar Ánimo</h3>
+                        <p>Usa el semáforo para identificar cómo te sientes ahora mismo.</p>
+                        <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                    <div class="action-card stagger-2" onclick="app.navigate('diario', document.querySelectorAll('.nav-item')[2])">
+                        <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <h3>Escribir Notas</h3>
+                        <p>Libera tu mente escribiendo tus pensamientos del día.</p>
+                        <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                    <div class="action-card stagger-3" onclick="app.navigate('diagnostico', document.querySelectorAll('.nav-item')[3])">
+                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Test de Estrés</h3>
+                        <p>Responde unas preguntas para recibir recomendaciones.</p>
+                        <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="view-semaforo" class="view">
-            <div class="glass-panel main-content fade-in">
+            <div class="glass-panel content-wrapper text-center fade-in-up">
                 <h2>Semáforo Emocional</h2>
-                <p>Selecciona cómo te sientes en este momento:</p>
-                <div class="traffic-light">
-                    <button class="light red" onclick="app.saveMood('Rojo', 'Crisis / Abrumado')"></button>
-                    <button class="light orange" onclick="app.saveMood('Naranja', 'Ansioso / Tenso')"></button>
-                    <button class="light yellow" onclick="app.saveMood('Amarillo', 'Neutral / Apático')"></button>
-                    <button class="light green" onclick="app.saveMood('Verde', 'Bien / Tranquilo')"></button>
+                <p class="subtitle">Tómate un segundo. ¿Qué color representa tu estado actual?</p>
+                
+                <div class="traffic-container">
+                    <button class="mood-btn red-glow" onclick="app.saveMood('Rojo', 'Crisis / Abrumado')">
+                        <i class="fa-solid fa-temperature-arrow-up"></i>
+                        <span>Rojo</span>
+                    </button>
+                    <button class="mood-btn orange-glow" onclick="app.saveMood('Naranja', 'Ansioso / Tenso')">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Naranja</span>
+                    </button>
+                    <button class="mood-btn yellow-glow" onclick="app.saveMood('Amarillo', 'Neutral / Apático')">
+                        <i class="fa-solid fa-cloud"></i>
+                        <span>Amarillo</span>
+                    </button>
+                    <button class="mood-btn green-glow" onclick="app.saveMood('Verde', 'Bien / Tranquilo')">
+                        <i class="fa-solid fa-sun"></i>
+                        <span>Verde</span>
+                    </button>
                 </div>
-                <p id="mood-feedback" class="feedback-msg"></p>
+                <div id="mood-feedback" class="feedback-toast hidden"></div>
             </div>
         </section>
 
         <section id="view-diario" class="view">
-            <div class="glass-panel main-content fade-in">
-                <h2>Diario Personal</h2>
-                <textarea id="diary-text" placeholder="Escribe aquí lo que sientes hoy..."></textarea>
-                <button onclick="app.saveNote()" class="primary-btn"><i class="fa-solid fa-floppy-disk"></i> Guardar Nota</button>
-                <div id="notes-list" class="list-container"></div>
+            <div class="glass-panel content-wrapper fade-in-up">
+                <h2>Tu Diario Personal</h2>
+                <div class="editor-container">
+                    <textarea id="diary-text" placeholder="Hoy me siento..."></textarea>
+                    <button onclick="app.saveNote()" class="primary-btn add-btn"><i class="fa-solid fa-plus"></i> Guardar Pensamiento</button>
+                </div>
+                <div id="notes-list" class="timeline-container mt-4"></div>
             </div>
         </section>
 
         <section id="view-diagnostico" class="view">
-            <div class="glass-panel main-content fade-in">
-                <h2>Evaluación Rápida</h2>
-                <div id="quiz-container">
-                    <h3 id="quiz-question">Cargando...</h3>
-                    <div id="quiz-options" class="options-grid"></div>
+            <div class="glass-panel content-wrapper fade-in-up">
+                <h2>Evaluación Dinámica</h2>
+                <div id="quiz-container" class="quiz-box">
+                    <div class="progress-bar"><div id="quiz-progress" class="progress-fill"></div></div>
+                    <h3 id="quiz-question" class="question-text">Cargando...</h3>
+                    <div id="quiz-options" class="options-column"></div>
                 </div>
             </div>
         </section>
 
         <section id="view-resultados" class="view">
-            <div class="glass-panel main-content fade-in">
-                <h2>Tu Historial de Bienestar</h2>
-                <div id="results-list" class="list-container"></div>
-            </div>
-        </section>
-
-        <section id="view-relajacion" class="view">
-            <div class="glass-panel main-content text-center fade-in">
-                <h2>Respiración Guiada</h2>
-                <p>Sigue el círculo para estabilizar tu ritmo cardíaco.</p>
-                <div class="breathing-circle">
-                    <span id="breathe-text">Inhala</span>
-                </div>
+            <div class="glass-panel content-wrapper fade-in-up">
+                <h2>Historial de Bienestar</h2>
+                <div id="results-list" class="timeline-container mt-4"></div>
             </div>
         </section>
 
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
